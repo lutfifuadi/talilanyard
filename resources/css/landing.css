@@ -43,9 +43,9 @@
   --color-soft-light: #F3F4F6;
 
   /* Font Families */
-  --font-heading: 'Outfit', system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
-  --font-cta: 'Outfit', system-ui, sans-serif;
+  --font-cta: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 /* ── Alpine.js x-cloak ── */
