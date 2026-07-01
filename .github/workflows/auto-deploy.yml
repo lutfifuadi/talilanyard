@@ -34,8 +34,7 @@ jobs:
 
       - name: Install NPM dependencies
         run: |
-          npm cache clean --force
-          npm ci --legacy-peer-deps
+          npm install --legacy-peer-deps
 
       - name: Build frontend assets
         run: npm run build
