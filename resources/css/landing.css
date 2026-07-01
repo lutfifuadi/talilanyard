@@ -1,0 +1,163 @@
+﻿@import "tailwindcss";
+
+/* ── Tailwind v4 Theme Configuration ── */
+@theme {
+  /* Brand Colors */
+  --color-primary: #0A2463;
+  --color-primary-50: #E8EDF7;
+  --color-primary-100: #C5D1EB;
+  --color-primary-200: #9DB0DB;
+  --color-primary-300: #7089C4;
+  --color-primary-400: #4D68B0;
+  --color-primary-500: #0A2463;
+  --color-primary-600: #081D50;
+  --color-primary-700: #06173D;
+  --color-primary-800: #04102A;
+  --color-primary-900: #020A1A;
+  --color-secondary: #1E3A8A;
+  --color-accent: #3B82F6;
+  --color-accent-50: #EFF6FF;
+  --color-accent-100: #DBEAFE;
+  --color-accent-200: #BFDBFE;
+  --color-accent-300: #93C5FD;
+  --color-accent-400: #60A5FA;
+  --color-accent-500: #3B82F6;
+  --color-accent-600: #2563EB;
+  --color-accent-700: #1D4ED8;
+
+  /* CTA / Warning */
+  --color-cta: #EF4444;
+  --color-cta-50: #FEF2F2;
+  --color-cta-100: #FEE2E2;
+  --color-cta-200: #FECACA;
+  --color-cta-300: #FCA5A5;
+  --color-cta-400: #F87171;
+  --color-cta-500: #EF4444;
+  --color-cta-600: #DC2626;
+
+  /* Amber Accent */
+  --color-amber-accent: #F59E0B;
+
+  /* Backgrounds */
+  --color-soft-grey: #F8FAFC;
+  --color-soft-light: #F3F4F6;
+
+  /* Font Families */
+  --font-heading: 'Outfit', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-cta: 'Outfit', system-ui, sans-serif;
+}
+
+/* ── Alpine.js x-cloak ── */
+[x-cloak] { display: none !important; }
+
+/* ── Smooth Scrolling ── */
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* ── CSS Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; padding: 0; }
+/* ── Custom Transitions ── */
+.accordion-content {
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+/* ── Floating WhatsApp Widget ── */
+.whatsapp-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #25D366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.whatsapp-widget:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-widget .tooltip-text {
+  position: absolute;
+  right: 64px;
+  background: #333;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.whatsapp-widget:hover .tooltip-text {
+  opacity: 1;
+}
+
+/* ── Hero Section ── */
+.hero-gradient {
+  background: linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%);
+}
+
+/* ── Card Hover Effects ── */
+.card-hover {
+  transition: all 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(10, 36, 99, 0.1);
+}
+
+/* ── Gallery Hover ── */
+.gallery-item {
+  overflow: hidden;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+.gallery-item img {
+  transition: transform 0.4s ease;
+}
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* ── Navbar Scroll Effect ── */
+.navbar-scrolled {
+  background: white !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+}
+.navbar-scrolled .landing-navbar-logo {
+  color: #0A2463 !important;
+}
+.navbar-scrolled .landing-nav-link {
+  color: #4B5563 !important;
+}
+.navbar-scrolled .landing-nav-link:hover {
+  color: #0A2463 !important;
+}
+
+/* ── Responsive Font Sizes ── */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem !important;
+  }
+}

@@ -1,0 +1,13 @@
+﻿{
+    "detected":  true,
+    "key":  "project",
+    "name":  "Project",
+    "path":  "D:\\Project\\Aplikasi-Cetaktalilanyard",
+    "type":  "web-application",
+    "framework":  "unknown",
+    "app_name":  "",
+    "description":  "The skeleton application for the Laravel framework.",
+    "folder_name":  "Aplikasi-Cetaktalilanyard",
+    "source":  "registry",
+    "cachedAt":  "2026-07-01T07:53:51.8472552+07:00"
+}
