@@ -66,47 +66,55 @@ body { margin: 0; padding: 0; }
 }
 
 /* ── Floating WhatsApp Widget ── */
-.whatsapp-widget {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9999;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: #25D366;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  text-decoration: none;
+@media (min-width: 1024px) {
+  .whatsapp-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .whatsapp-widget:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  }
+
+  .whatsapp-widget .tooltip-text {
+    position: absolute;
+    right: 64px;
+    background: #333;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .whatsapp-widget:hover .tooltip-text {
+    opacity: 1;
+  }
 }
 
-.whatsapp-widget:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-}
-
-.whatsapp-widget .tooltip-text {
-  position: absolute;
-  right: 64px;
-  background: #333;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  font-family: 'Inter', sans-serif;
-}
-
-.whatsapp-widget:hover .tooltip-text {
-  opacity: 1;
+@media (max-width: 1023px) {
+  .whatsapp-widget {
+    display: none !important;
+  }
 }
 
 /* ── Hero Section ── */
@@ -153,6 +161,12 @@ body { margin: 0; padding: 0; }
 }
 .navbar-scrolled .landing-nav-link:hover {
   color: #0A2463 !important;
+}
+.navbar-scrolled #mobile-menu-btn {
+  color: #0A2463 !important;
+}
+.navbar-scrolled #mobile-menu-btn:hover {
+  color: #1E3A8A !important;
 }
 
 /* ── Responsive Font Sizes ── */
