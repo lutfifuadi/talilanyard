@@ -1,37 +1,34 @@
 {
   "menu": [
     {
-      "url": "/",
-      "name": "Home",
+      "url": "/admin/dashboard",
+      "name": "Dashboard",
       "icon": "menu-icon icon-base ti tabler-smart-home",
-      "slug": "pages-home"
+      "slug": "admin.dashboard"
     },
     {
-      "url": "/page-2",
-      "icon": "menu-icon icon-base ti tabler-file",
-      "name": "Page 2",
-      "slug": "pages-page-2"
+      "url": "/admin/products",
+      "name": "Kelola Produk",
+      "icon": "menu-icon icon-base ti tabler-package",
+      "slug": "admin.products"
     },
     {
-      "url": "/pages/misc-error",
-      "name": "Error",
-      "icon": "menu-icon icon-base ti tabler-alert-triangle",
-      "slug": "pages-misc-error",
-      "target": "_blank"
+      "url": "/admin/accessories",
+      "name": "Kelola Aksesoris",
+      "icon": "menu-icon icon-base ti tabler-link",
+      "slug": "admin.accessories"
     },
     {
-      "url": "/auth/login-basic",
-      "name": "Login",
-      "icon": "menu-icon icon-base ti tabler-login",
-      "slug": "auth-login-basic",
-      "target": "_blank"
+      "url": "/admin/order-logs",
+      "name": "Laporan Klik WA",
+      "icon": "menu-icon icon-base ti tabler-report-analytics",
+      "slug": "admin.order-logs"
     },
     {
-      "url": "/auth/register-basic",
-      "name": "Register",
-      "icon": "menu-icon icon-base ti tabler-user",
-      "slug": "auth-register-basic",
-      "target": "_blank"
+      "url": "/admin/settings",
+      "name": "Pengaturan",
+      "icon": "menu-icon icon-base ti tabler-settings",
+      "slug": "admin.settings"
     }
   ]
 }

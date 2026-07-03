@@ -26,8 +26,11 @@ Route::post('/admin/logout', [LoginBasic::class, 'logout'])->name('admin.logout'
 
 // Protected Admin Routes
 Route::middleware(['admin.auth'])->group(function () {
-    Route::get('/admin/dashboard', [Page2::class, 'index'])->name('admin.dashboard');
-    // Tambahkan route admin lainnya di sini
+    Route::get('/admin/dashboard', \App\Livewire\Admin\DashboardStats::class)->name('admin.dashboard');
+    Route::get('/admin/products', \App\Livewire\Admin\ProductManager::class)->name('admin.products');
+    Route::get('/admin/accessories', \App\Livewire\Admin\AccessoryManager::class)->name('admin.accessories');
+    Route::get('/admin/settings', \App\Livewire\Admin\SettingManager::class)->name('admin.settings');
+    Route::get('/admin/order-logs', \App\Livewire\Admin\OrderLogReporter::class)->name('admin.order-logs');
 });
 
 // Old authentication path compatibility if needed or redirect
