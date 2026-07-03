@@ -4,6 +4,7 @@ import html from '@rollup/plugin-html';
 import { glob } from 'glob';
 import path from 'path';
 import iconsPlugin from './vite.icons.plugin.js';
+import tailwindcss from '@tailwindcss/vite';
 
 /**
  * Get Files from a directory
@@ -55,8 +56,10 @@ export default defineConfig({
     laravel({
       input: [
         'resources/css/app.css',
+        'resources/css/landing.css',
         'resources/assets/css/demo.css',
         'resources/js/app.js',
+        'resources/js/landing.js',
         ...pageJsFiles,
         ...vendorJsFiles,
         ...LibsJsFiles,
@@ -70,6 +73,7 @@ export default defineConfig({
       ],
       refresh: true
     }),
+    tailwindcss(),
     html(),
     libsWindowAssignment(),
     iconsPlugin()
