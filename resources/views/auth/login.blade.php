@@ -48,7 +48,7 @@ $customizerHidden = 'customizer-hide';
           </div>
         </div>
         @endif
-        <form id="formAuthentication" class="mb-6" action="{{ route('login') }}" method="POST">
+        <form id="formAuthentication" class="mb-6" action="{{ route('admin.login.post') }}" method="POST">
           @csrf
           <div class="mb-6">
             <label for="login-email" class="form-label">Email</label>
