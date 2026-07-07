@@ -57,6 +57,7 @@
           @endif
 
           @yield('content')
+          {!! $slot ?? '' !!}
 
         </div>
         <!-- / Content -->

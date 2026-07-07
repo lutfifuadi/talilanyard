@@ -53,15 +53,15 @@
                 Lebar Lanyard
               </label>
               <div class="grid grid-cols-3 gap-3">
-                <template x-for="lebar in lebarList" :key="lebar">
+                <template x-for="lebar in lebarList" :key="lebar.width">
                   <button 
-                    @click="selectedLebar = lebar; hitungHarga()"
-                    :class="selectedLebar === lebar 
+                    @click="selectedLebar = lebar.width; hitungHarga()"
+                    :class="selectedLebar === lebar.width 
                       ? 'ring-2 border-transparent text-white' 
                       : 'border-gray-200 text-gray-700 hover:border-gray-300'"
-                    :style="selectedLebar === lebar ? 'background-color: #3B82F6;' : ''"
+                    :style="selectedLebar === lebar.width ? 'background-color: #3B82F6;' : ''"
                     class="px-4 py-2.5 rounded-[5px] border text-sm font-semibold transition-all duration-200 font-body">
-                    <span x-text="lebar + ' cm'"></span>
+                    <span x-text="lebar.width + ' cm'"></span>
                   </button>
                 </template>
               </div>
@@ -76,17 +76,17 @@
                 <input 
                   type="number" 
                   x-model="quantity" 
-                  @input.debounce="hitungHarga()"
+                  @input.debounce.300ms="hitungHarga()"
                   min="1"
                   class="w-full px-4 py-3 rounded-[5px] border border-gray-200 text-sm font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 font-body"
                   placeholder="Contoh: 100">
               </div>
               <p class="font-body text-xs text-gray-400 mt-1.5">
-                *Minimal pemesanan <strong>40 pcs</strong> (MOQ)
+                *Minimal pemesanan <strong x-text="moq + ' pcs'"></strong> (MOQ)
               </p>
               <div class="flex gap-2 mt-2">
-                <button @click="quantity = 40; hitungHarga()" class="px-3 py-1.5 text-xs font-semibold rounded-[5px] border border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-all">
-                  40 pcs
+                <button @click="quantity = moq; hitungHarga()" class="px-3 py-1.5 text-xs font-semibold rounded-[5px] border border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-all">
+                  <span x-text="moq + ' pcs'"></span>
                 </button>
                  <button @click="quantity = 100; hitungHarga()" class="px-3 py-1.5 text-xs font-semibold rounded-[5px] border border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-all">
                    100 pcs
@@ -205,15 +205,20 @@
                 </p>
 
                 {{-- CTA --}}
-                <a href="https://wa.me/6282113328585?text=Halo%20AzagiPrint,%20saya%20ingin%20pesan%20lanyard" 
-                   target="_blank"
-                   class="w-full font-cta text-sm font-semibold px-6 py-3.5 rounded-[5px] text-white transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                <button 
+                   @click="kirimPemesanan()"
+                   :disabled="isSubmitting"
+                   class="w-full font-cta text-sm font-semibold px-6 py-3.5 rounded-[5px] text-white transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50"
                    style="background-color: #25D366;">
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" x-show="!isSubmitting">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                   </svg>
-                  Pesan Sekarang
-                </a>
+                  <svg class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" x-show="isSubmitting" x-cloak>
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span x-text="isSubmitting ? 'Memproses...' : 'Pesan Sekarang'"></span>
+                </button>
               </div>
             </div>
           </div>
@@ -226,62 +231,78 @@
   <script>
     function kalkulatorData() {
       return {
-        bahanList: [
-          { id: 'tisue', nama: 'Tisue', hargaMulai: 5000 },
-          { id: 'polyester', nama: 'Polyester', hargaMulai: 7000 },
-        ],
-        lebarList: ['1.5', '2.0', '2.5'],
-        aksesorisList: [
-          { id: 'hook', nama: 'Metal Hook', harga: 1500 },
-          { id: 'regulator', nama: 'Regulator Plastik', harga: 1000 },
-          { id: 'id-card-holder', nama: 'ID Card Holder', harga: 2500 },
-          { id: 'lanyard-attachment', nama: 'Lanyard Attachment', harga: 800 },
-        ],
-        selectedBahan: 'tisue',
-        selectedLebar: '1.5',
-        quantity: 100,
+        bahanList: @json($products),
+        lebarList: @json($calculatorWidthOptions),
+        aksesorisList: @json($accessories),
+        moq: @json((int)$calculatorMoq),
+        selectedBahan: @if(count($products) > 0) @json($products[0]['id']) @else null @endif,
+        selectedLebar: @json($calculatorWidthOptions[0]['width'] ?? '1.5'),
+        quantity: @json((int)$calculatorMoq),
         selectedAksesoris: [],
         showResult: false,
         totalHarga: 0,
         hargaPerPcs: 0,
+        isSubmitting: false,
 
         init() {
-          // showResult tetap false sampai user memilih spesifikasi
+          this.hitungHarga();
         },
 
         hitungHarga() {
           const bahan = this.bahanList.find(b => b.id === this.selectedBahan);
           const qty = parseInt(this.quantity) || 0;
           
-          // Harga dasar per pcs berdasarkan bahan
-          let hargaDasar = bahan ? bahan.hargaMulai : 5000;
+          if (qty < this.moq) {
+            this.showResult = false;
+            return;
+          }
+
+          // Harga dasar per pcs berdasarkan tiering kuantitas produk dari DB
+          let hargaDasar = 0;
+          if (bahan && bahan.prices && bahan.prices.length > 0) {
+            // cari tier yang cocok
+            const tier = bahan.prices.find(p => {
+              const min = parseInt(p.min_quantity);
+              const max = p.max_quantity ? parseInt(p.max_quantity) : null;
+              if (max) {
+                return qty >= min && qty <= max;
+              } else {
+                return qty >= min;
+              }
+            });
+            if (tier) {
+              hargaDasar = parseFloat(tier.price_per_pcs);
+            } else {
+              // Jika kuantitas di bawah min_quantity tier pertama, gunakan harga tier pertama
+              hargaDasar = parseFloat(bahan.prices[0].price_per_pcs);
+            }
+          } else {
+            hargaDasar = bahan ? parseFloat(bahan.hargaMulai) : 0;
+          }
           
-          // Faktor lebar
-          const lebarVal = parseFloat(this.selectedLebar);
-          if (lebarVal === 2.0) hargaDasar += 500;
-          else if (lebarVal === 2.5) hargaDasar += 1000;
+          // Tambahan biaya lebar lanyard dari DB settings
+          let biayaLebar = 0;
+          const lebarOption = this.lebarList.find(l => l.width === this.selectedLebar);
+          if (lebarOption) {
+            biayaLebar = parseFloat(lebarOption.extra_price) || 0;
+          }
           
-          // Diskon quantity
-          let diskon = 0;
-          if (qty >= 500) diskon = 0.15;
-          else if (qty >= 200) diskon = 0.10;
-          else if (qty >= 100) diskon = 0.05;
-          
-          // Harga setelah diskon
-          const hargaSetelahDiskon = hargaDasar * (1 - diskon);
-          
-          // Aksesoris
+          // Aksesoris terpilih
           let totalAksesoris = 0;
           this.selectedAksesoris.forEach(id => {
             const aks = this.aksesorisList.find(a => a.id === id);
-            if (aks) totalAksesoris += aks.harga;
+            if (aks) {
+              totalAksesoris += parseFloat(aks.harga);
+            }
           });
           
-          this.hargaPerPcs = Math.round(hargaSetelahDiskon + totalAksesoris);
+          this.hargaPerPcs = Math.round(hargaDasar + biayaLebar + totalAksesoris);
           this.totalHarga = this.hargaPerPcs * qty;
           
-          if (qty > 0) {
+          if (qty >= this.moq) {
             this.showResult = true;
+          } else {
+            this.showResult = false;
           }
         },
 
@@ -292,8 +313,59 @@
 
         formatRupiah(angka) {
           return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        },
+
+        async kirimPemesanan() {
+          if (this.quantity < this.moq) {
+            alert('Jumlah pesanan minimal ' + this.moq + ' pcs');
+            return;
+          }
+          
+          this.isSubmitting = true;
+          
+          try {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            
+            const response = await fetch('/admin/order-logs/store', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                product_id: this.selectedBahan,
+                quantity: this.quantity,
+                lebar: this.selectedLebar,
+                accessories: this.selectedAksesoris,
+                base_price: this.hargaPerPcs - this.selectedAksesoris.reduce((sum, id) => {
+                  const aks = this.aksesorisList.find(a => a.id === id);
+                  return sum + (aks ? parseFloat(aks.harga) : 0);
+                }, 0),
+                accessory_price: this.selectedAksesoris.reduce((sum, id) => {
+                  const aks = this.aksesorisList.find(a => a.id === id);
+                  return sum + (aks ? parseFloat(aks.harga) : 0);
+                }, 0),
+                total_price: this.totalHarga
+              })
+            });
+
+            const data = await response.json();
+            
+            if (response.ok && data.redirect_url) {
+              window.open(data.redirect_url, '_blank');
+            } else {
+              alert(data.message || 'Terjadi kesalahan saat memproses pesanan.');
+            }
+          } catch (error) {
+            console.error(error);
+            alert('Gagal menghubungi server. Silakan coba lagi.');
+          } finally {
+            this.isSubmitting = false;
+          }
         }
       }
     }
   </script>
+</section>
 </section>

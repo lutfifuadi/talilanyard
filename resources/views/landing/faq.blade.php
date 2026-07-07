@@ -44,7 +44,7 @@
                class="overflow-hidden">
             <div class="px-6 pb-5">
               <p class="font-body text-gray-600 text-sm leading-relaxed">
-                Minimum order (MOQ) untuk cetak lanyard di <strong>AzagiPrint adalah 40 pcs</strong>. Dengan MOQ yang rendah, Anda bisa mendapatkan lanyard custom berkualitas dengan harga terjangkau. Cocok untuk kantor, event, sekolah, dan promosi bisnis.
+                Minimum order (MOQ) untuk cetak lanyard di <strong>{{ \App\Models\Setting::getValue('brand_name', 'AzagiPrint') }} adalah {{ \App\Models\Setting::getValue('calculator_moq', 40) }} pcs</strong>. Dengan MOQ yang rendah, Anda bisa mendapatkan lanyard custom berkualitas dengan harga terjangkau. Cocok untuk kantor, event, sekolah, dan promosi bisnis.
               </p>
             </div>
           </div>
@@ -242,7 +242,7 @@
                class="overflow-hidden">
             <div class="px-6 pb-5">
               <p class="font-body text-gray-600 text-sm leading-relaxed">
-                Tentu! <strong>AzagiPrint</strong> memberikan garansi kualitas untuk setiap pesanan. Jika hasil cetak tidak sesuai dengan desain yang disetujui, kami akan <strong>produksi ulang gratis</strong> tanpa biaya tambahan. Kepuasan pelanggan adalah prioritas utama kami.
+                Tentu! <strong>{{ \App\Models\Setting::getValue('brand_name', 'AzagiPrint') }}</strong> memberikan garansi kualitas untuk setiap pesanan. Jika hasil cetak tidak sesuai dengan desain yang disetujui, kami akan <strong>produksi ulang gratis</strong> tanpa biaya tambahan. Kepuasan pelanggan adalah prioritas utama kami.
               </p>
             </div>
           </div>
@@ -261,7 +261,7 @@
             Tim kami siap membantu Anda
           </p>
         </div>
-        <a href="https://wa.me/6282113328585?text=Halo%20AzagiPrint,%20saya%20ada%20pertanyaan%20tentang%20lanyard" 
+        <a href="https://wa.me/{{ \App\Models\Setting::getValue('whatsapp_number', '6282113328585') }}?text=Halo%20{{ rawurlencode(\App\Models\Setting::getValue('brand_name', 'AzagiPrint')) }},%20saya%20ada%20pertanyaan%20tentang%20lanyard" 
            target="_blank"
            class="font-cta text-sm font-semibold px-5 py-2.5 rounded-[5px] text-white transition-all duration-300 inline-flex items-center gap-2 mt-2 sm:mt-0"
            style="background-color: #25D366;">

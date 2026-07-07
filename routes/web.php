@@ -10,7 +10,25 @@ use App\Http\Controllers\authentications\RegisterBasic;
 
 // Main Page Route
 Route::get('/', function () {
-    return view('landing.index');
+    $rawProducts = \App\Models\Product::with('prices')->where('is_active', true)->get();
+    $products = $rawProducts->map(fn($p) => [
+        'id' => $p->id,
+        'nama' => $p->name,
+        'hargaMulai' => $p->prices->first()?->price_per_pcs ?? 0,
+        'prices' => $p->prices
+    ]);
+
+    $rawAccessories = \App\Models\Accessory::where('is_active', true)->get();
+    $accessories = $rawAccessories->map(fn($a) => [
+        'id' => $a->id,
+        'nama' => $a->name,
+        'harga' => $a->price
+    ]);
+
+    $calculatorWidthOptions = json_decode(\App\Models\Setting::getValue('calculator_width_options'), true) ?: [];
+    $calculatorMoq = \App\Models\Setting::getValue('calculator_moq', 40);
+    
+    return view('landing.index', compact('products', 'accessories', 'calculatorWidthOptions', 'calculatorMoq'));
 })->name('landing');
 
 Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
@@ -32,6 +50,9 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::get('/admin/settings', \App\Livewire\Admin\SettingManager::class)->name('admin.settings');
     Route::get('/admin/order-logs', \App\Livewire\Admin\OrderLogReporter::class)->name('admin.order-logs');
 });
+
+// AJAX route for storing OrderLog and getting WA Redirect URL
+Route::post('/admin/order-logs/store', [\App\Http\Controllers\OrderLogController::class, 'store'])->name('admin.order-logs.store');
 
 // Old authentication path compatibility if needed or redirect
 Route::get('/auth/login-basic', function () {

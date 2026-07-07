@@ -10,6 +10,7 @@
 
   <!-- Sections:Start -->
   @yield('content')
+  {!! $slot ?? '' !!}
   <!-- / Sections:End -->
 
   @include('layouts/sections/footer/footer-front')

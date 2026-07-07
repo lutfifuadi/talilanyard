@@ -12,16 +12,16 @@
       {{-- Left Column: Text --}}
       <div class="text-center lg:text-left">
         <span class="inline-block font-cta text-xs font-semibold tracking-wider uppercase px-4 py-2 rounded-[5px] mb-6" style="background: rgba(255,255,255,0.15); color: #93C5FD;">
-          AzagiPrint — Desa Percetakan Online
+          {{ \App\Models\Setting::getValue('brand_name', 'AzagiPrint') }} — Desa Percetakan Online
         </span>
 
         <h1 class="hero-title font-heading text-2xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6" style="line-height: 1.15;">
-          Cetak Tali Lanyard
-          <span class="block" style="color: #60A5FA;">Berkualitas #1 di Jakarta</span>
+          {{ \App\Models\Setting::getValue('hero_title', 'Cetak Tali Lanyard') }}
+          <span class="block" style="color: #60A5FA;">{{ \App\Models\Setting::getValue('hero_subtitle', 'Berkualitas #1 di Jakarta') }}</span>
         </h1>
 
         <p class="font-body text-sm md:text-base text-white/80 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-          Desa Percetakan Online | Mudah | Terlengkap. Cetak lanyard custom MOQ 40 pcs, 
+          Desa Percetakan Online | Mudah | Terlengkap. Cetak lanyard custom MOQ {{ \App\Models\Setting::getValue('calculator_moq', 40) }} pcs, 
           cetak 2 sisi Full Colour, gratis desain, dan sudah termasuk kait + stopper.
         </p>
 
@@ -37,7 +37,7 @@
               Hitung Harga
             </span>
           </a>
-          <a href="https://wa.me/6282113328585?text=Halo%20AzagiPrint,%20saya%20ingin%20konsultasi%20tentang%20lanyard" 
+          <a href="https://wa.me/{{ \App\Models\Setting::getValue('whatsapp_number', '6282113328585') }}?text=Halo%20{{ rawurlencode(\App\Models\Setting::getValue('brand_name', 'AzagiPrint')) }},%20saya%20ingin%20konsultasi%20tentang%20lanyard" 
              target="_blank"
              class="font-cta text-base font-semibold px-8 py-3.5 rounded-[5px] text-white transition-all duration-300 text-center border-2 border-white/40 hover:border-white/60 hover:bg-white/10">
             <span class="flex items-center justify-center gap-2">
@@ -55,19 +55,19 @@
             <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <span>1.200+ Pelanggan</span>
+            <span>{{ \App\Models\Setting::getValue('trust_customer', '1.200') }}+ Pelanggan</span>
           </div>
           <div class="flex items-center gap-2 text-white/70 text-xs md:text-sm">
             <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <span>272 Produk</span>
+            <span>{{ \App\Models\Setting::getValue('trust_product', '272') }} Produk</span>
           </div>
           <div class="flex items-center gap-2 text-white/70 text-xs md:text-sm">
             <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <span>566+ Pesanan Selesai</span>
+            <span>{{ \App\Models\Setting::getValue('trust_completed', '566') }}+ Pesanan Selesai</span>
           </div>
         </div>
       </div>

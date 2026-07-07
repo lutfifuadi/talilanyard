@@ -110,6 +110,17 @@ class DatabaseSeeder extends Seeder
             'facebook_url' => 'https://facebook.com/cetaktalilanyard',
             'tiktok_url' => 'https://tiktok.com/@cetaktalilanyard',
             'email' => 'info@cetaktalilanyard.com',
+            'brand_name' => 'AzagiPrint',
+            'logo_text' => 'AzagiPrint Lanyard',
+            'operating_hours' => 'Senin - Sabtu: 08.00 - 17.00 WIB',
+            'hero_title' => 'Cetak Tali Lanyard',
+            'hero_subtitle' => 'Berkualitas #1 di Jakarta',
+            'meta_description' => 'AzagiPrint — Desa Percetakan Online. Cetak Tali Lanyard custom Jakarta, MOQ 40 pcs, cetak 2 sisi Full Colour, gratis desain, kualitas terbaik.',
+            'trust_customer' => '1200',
+            'trust_product' => '272',
+            'trust_completed' => '566',
+            'calculator_moq' => '40',
+            'calculator_width_options' => '[{"width":"1.5","extra_price":0},{"width":"2.0","extra_price":500},{"width":"2.5","extra_price":1000}]',
         ];
 
         foreach ($settings as $key => $value) {
